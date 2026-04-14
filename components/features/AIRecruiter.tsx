@@ -193,45 +193,69 @@ const MentorPlanView = ({ planData, onBack }: any) => {
             <ArrowLeft className="mr-2 h-4 w-4" /> Back to Report
           </Button>
           <div className="text-right">
-             <h2 className="text-xl font-bold">Your Mentorship Path</h2>
-             <p className="text-xs text-muted-foreground">Tailored resources for your growth</p>
+             <h2 className="text-xl font-bold">Strategic Mentorship Path</h2>
+             <p className="text-xs text-muted-foreground">Expertly curated guidance based on your performance data.</p>
           </div>
        </div>
 
-       <div className="space-y-4">
+       <div className="space-y-6">
           {planData.map((item: any, i: number) => (
             <Card key={i} className="border-white/5 bg-card/30 backdrop-blur-md overflow-hidden hover:border-primary/30 transition-all">
-               <div className="flex flex-col md:flex-row">
-                  <div className="p-6 md:w-1/3 bg-white/5 border-r border-white/5">
-                     <Badge className={`mb-3 ${item.weaknessLevel === 'High' ? 'bg-rose-500/20 text-rose-400' : 'bg-amber-500/20 text-amber-400'}`}>
-                        {item.weaknessLevel} Priority
-                     </Badge>
-                     <h3 className="text-lg font-bold text-white mb-2">{item.topic}</h3>
-                     <p className="text-xs text-slate-400 italic">"{item.reason}"</p>
+               <div className="h-1 bg-gradient-to-r from-primary to-purple-500 opacity-50" />
+               <CardContent className="p-8 space-y-6">
+                  <div className="flex justify-between items-start">
+                     <div className="space-y-1">
+                        <h3 className="text-2xl font-bold text-white flex items-center gap-3">
+                           <span className="text-primary/50 text-xl font-mono">{i + 1}.</span> {item.topic}
+                        </h3>
+                        <p className="text-sm text-slate-400 max-w-2xl italic leading-relaxed">"{item.explanation}"</p>
+                     </div>
+                     <a href={item.youtubeLink} target="_blank" rel="noopener noreferrer">
+                        <Button size="sm" variant="outline" className="text-rose-400 border-rose-500/30 bg-rose-500/5 hover:bg-rose-500/20">
+                           <PlayCircle className="mr-2 h-4 w-4" /> Tutorial
+                        </Button>
+                     </a>
                   </div>
-                  <div className="p-6 flex-1 space-y-4">
-                     <h4 className="text-[10px] font-bold text-primary tracking-widest uppercase">Learning Resources</h4>
-                     <div className="grid gap-3">
-                        {item.resources.map((res: any, idx: number) => (
-                          <a 
-                            key={idx} 
-                            href={res.url} 
-                            target="_blank" 
-                            rel="noopener noreferrer" 
-                            className="flex items-center justify-between p-3 bg-white/5 rounded-xl border border-white/5 hover:bg-primary/10 hover:border-primary/20 transition-all group"
-                          >
-                             <div className="flex items-center gap-3">
-                                <div className="p-2 bg-primary/20 rounded-lg group-hover:bg-primary/40 transition-all">
-                                   <Target className="h-4 w-4 text-primary" />
-                                </div>
-                                <span className="text-sm font-medium">{res.title}</span>
-                             </div>
-                             <ExternalLink className="h-4 w-4 text-slate-500 group-hover:text-primary transition-all" />
-                          </a>
-                        ))}
+
+                  <div className="grid md:grid-cols-3 gap-6 pt-4 border-t border-white/5">
+                     <div className="space-y-3">
+                        <h4 className="text-[10px] font-bold text-primary tracking-widest uppercase flex items-center gap-2">
+                           <ChevronRight className="h-3 w-3" /> Key Concepts
+                        </h4>
+                        <div className="flex flex-wrap gap-2">
+                           {item.keyConcepts?.map((c: string, idx: number) => (
+                             <Badge key={idx} variant="secondary" className="bg-white/5 text-[10px] font-normal">{c}</Badge>
+                           ))}
+                        </div>
+                     </div>
+
+                     <div className="space-y-3">
+                        <h4 className="text-[10px] font-bold text-purple-400 tracking-widest uppercase flex items-center gap-2">
+                           <PenTool className="h-3 w-3" /> Revision Notes
+                        </h4>
+                        <ul className="space-y-1">
+                           {item.notes?.map((n: string, idx: number) => (
+                             <li key={idx} className="text-[11px] text-slate-400 flex items-start gap-2">
+                                <span className="text-purple-400 mt-1.5">•</span> {n}
+                             </li>
+                           ))}
+                        </ul>
+                     </div>
+
+                     <div className="space-y-3">
+                        <h4 className="text-[10px] font-bold text-emerald-400 tracking-widest uppercase flex items-center gap-2">
+                           <ClipboardList className="h-3 w-3" /> Practice
+                        </h4>
+                        <ul className="space-y-1">
+                           {item.practiceQuestions?.map((q: string, idx: number) => (
+                             <li key={idx} className="text-[11px] text-slate-400 flex items-start gap-2">
+                                <span className="text-emerald-400 mt-1.5">•</span> {q}
+                             </li>
+                           ))}
+                        </ul>
                      </div>
                   </div>
-               </div>
+               </CardContent>
             </Card>
           ))}
        </div>

@@ -209,12 +209,12 @@ Provide your output as a valid JSON object matching the following structure exac
 }
 
 /**
- * AI Mentor Plan (Aastha's Feature)
+ * AI Mentor Plan (Collaborative Enhancement)
  */
 export async function generateMentorPlan(weakTopicsString: string) {
   const prompt = `
 You are an intelligent career assistant integrated into Saarthi AI.
-Analyze the student's weak topics and recommend high-quality learning resources.
+Analyze the student's weak areas and recommend high-quality learning resources and a study path.
 
 Weak Topics: "${weakTopicsString}"
 
@@ -222,14 +222,11 @@ Return a valid JSON array matching this exact schema:
 [
   {
     "topic": "string",
-    "weaknessLevel": "Low | Medium | High",
-    "resources": [
-      {
-        "title": "string",
-        "url": "string"
-      }
-    ],
-    "reason": "string"
+    "explanation": "string (Why is this important for placements?)",
+    "keyConcepts": ["string", "string"],
+    "youtubeLink": "string (A valid search link for this topic on YouTube)",
+    "notes": ["string", "string (Short revision points)"],
+    "practiceQuestions": ["string", "string (Specific interview questions to solve)"]
   }
 ]
 `;
@@ -242,9 +239,11 @@ Return a valid JSON array matching this exact schema:
     const topics = weakTopicsString.split(',').map(s => s.trim()).filter(Boolean);
     return topics.map(topic => ({
       topic,
-      weaknessLevel: "High",
-      reason: "Master this core topic thoroughly.",
-      resources: [{ title: "Search on YouTube", url: `https://www.youtube.com/results?search_query=${encodeURIComponent(topic)}` }]
+      explanation: `Mastering ${topic} is crucial for recruitment technical rounds.`,
+      keyConcepts: ["Fundamental theory", "Common applications"],
+      youtubeLink: `https://www.youtube.com/results?search_query=${encodeURIComponent(topic)}`,
+      notes: ["Review core syntax", "Understand time complexity"],
+      practiceQuestions: [`Implement basic ${topic} algorithm.`]
     }));
   }
 }
