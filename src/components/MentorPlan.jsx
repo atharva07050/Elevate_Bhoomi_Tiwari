@@ -28,45 +28,42 @@ export default function MentorPlan({ planData, onBack }) {
         {planData.map((plan, index) => (
           <div key={index} style={{ background: 'rgba(0,0,0,0.2)', padding: '1.5rem', borderRadius: '16px', border: '1px solid var(--surface-border)' }}>
             <h3 style={{ fontSize: '1.4rem', color: '#818cf8', marginBottom: '0.5rem' }}>{index + 1}. {plan.topic}</h3>
-            <p style={{ color: 'var(--text-primary)', marginBottom: '1.25rem', fontSize: '0.95rem' }}>{plan.explanation}</p>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
+                <span className={`badge ${plan.weaknessLevel?.toLowerCase() === 'high' ? 'badge-error' : plan.weaknessLevel?.toLowerCase() === 'medium' ? 'badge-warning' : 'badge-neutral'}`} style={{ textTransform: 'uppercase', fontSize: '0.7rem', padding: '4px 8px', borderRadius: '4px' }}>
+                  {plan.weaknessLevel} Risk
+                </span>
+            </div>
             
-            <div className="mb-4">
-              <h4 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#c084fc', marginBottom: '0.5rem' }}>
-                <ChevronRight size={16} /> Key Concepts
-              </h4>
-              <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-                {plan.keyConcepts.map((concept, cIdx) => (
-                  <span key={cIdx} className="badge badge-neutral" style={{ textTransform: 'none' }}>{concept}</span>
-                ))}
-              </div>
-            </div>
+            <p style={{ color: 'var(--text-primary)', marginBottom: '1.25rem', fontSize: '0.95rem', lineHeight: '1.5' }}>
+              <strong>Reason:</strong> {plan.reason}
+            </p>
 
             <div className="mb-4">
-              <h4 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#f472b6', marginBottom: '0.5rem' }}>
-                <PenTool size={16} /> Quick Revision Notes
+              <h4 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#f472b6', marginBottom: '0.75rem' }}>
+                <ClipboardList size={16} /> Recommended Resources
               </h4>
-              <ul style={{ paddingLeft: '1.5rem', color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
-                {plan.notes.map((note, nIdx) => (
-                  <li key={nIdx} style={{ marginBottom: '0.25rem' }}>{note}</li>
-                ))}
+              <ul style={{ paddingLeft: '1.5rem', color: 'var(--text-secondary)', fontSize: '0.9rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                {plan.resources && plan.resources.map((res, rIdx) => {
+                  let href = res.url || (typeof res === 'string' && res.startsWith('http') ? res : '#');
+                  let text = res.title || res.name || res;
+                  
+                  if (typeof res === 'string') {
+                    const urlMatch = res.match(/(https?:\/\/[^\s]+)/);
+                    if (urlMatch) {
+                      href = urlMatch[0].trim();
+                      text = res.replace(href, '').replace(/:\s*$/, '').replace(/-/g, '').trim();
+                    }
+                  }
+
+                  return (
+                    <li key={rIdx} style={{ marginBottom: '0.25rem' }}>
+                       <a href={href !== '#' ? href : undefined} target="_blank" rel="noopener noreferrer" style={{ color: '#818cf8', textDecoration: 'underline', fontWeight: '500', transition: 'color 0.2s' }} onMouseOver={(e) => e.target.style.color = '#c084fc'} onMouseOut={(e) => e.target.style.color = '#818cf8'}>
+                          {text || 'View Resource'}
+                       </a>
+                    </li>
+                  );
+                })}
               </ul>
-            </div>
-
-            <div className="mb-4">
-              <h4 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--success)', marginBottom: '0.5rem' }}>
-                <ClipboardList size={16} /> Practice Questions
-              </h4>
-              <ul style={{ paddingLeft: '1.5rem', color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
-                {plan.practiceQuestions.map((q, qIdx) => (
-                  <li key={qIdx} style={{ marginBottom: '0.25rem' }}>{q}</li>
-                ))}
-              </ul>
-            </div>
-
-            <div style={{ marginTop: '1.5rem' }}>
-              <a href={plan.youtubeLink} target="_blank" rel="noopener noreferrer" className="btn" style={{ background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', border: '1px solid rgba(239, 68, 68, 0.3)', padding: '0.5rem 1rem', fontSize: '0.9rem' }}>
-                <PlayCircle size={16} /> Suggested Video Tutorial
-              </a>
             </div>
           </div>
         ))}

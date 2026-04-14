@@ -1,16 +1,23 @@
-# React + Vite
+# Elevate: AI Tech Recruiter & Career Assistant
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Elevate is a cutting-edge AI-powered dashboard designed to help technical recruiters intelligently evaluate student performance and automatically generate highly personalized, actionable mentorship and study plans to address core technical weaknesses. Built natively with React and Vite, the platform directly integrates with **Google Gemini 2.5 Flash** to provide dynamically driven reports and remediation steps.
 
-Currently, two official plugins are available:
+## Features
+- **Intelligent Evaluation:** Evaluates candidates and predicts hiring readiness via automated heuristics and deep AI analysis.
+- **Dynamic Mentorship Generation:** Automatically provisions a granular syllabus mapping "Risk Levels" against technical weaknesses.
+- **AI-driven Formatting Check:** Implements strict machine-readable responses directly mapping from pure natural language inferences leveraging `@google/genai`.
+- **Hot Replacement / Fallbacks:** Built-in data-safe rendering that supports zero-downtime mock evaluations when the API drops out.
+- **Elegant UI/UX:** Styled natively using robust, modern CSS without bloat, incorporating seamless micro-animations.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Getting Started
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. **Clone the repository.**
+2. **Install dependencies:**  
+   `npm install`
+3. **Set up API Keys:**  
+   Create a `.env` file at the root of the project and add your Google Gemini API key:
+   ```env
+   VITE_GEMINI_API_KEY=your_gemini_api_key_here
+   ```
+4. **Run the local development server:**  
+   `npm run dev`
