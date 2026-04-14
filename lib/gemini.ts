@@ -1,4 +1,3 @@
-
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import Groq from "groq-sdk";
 import axios from "axios";
@@ -291,14 +290,14 @@ export async function generateAdaptiveQuiz(
   difficulty: "Easy" | "Medium" | "Hard",
   weakTopics: string[]
 ) {
-  const prompt = \You are an adaptive quiz generator for tech placement preparation.
+  const prompt = `You are an adaptive quiz generator for tech placement preparation.
 Generate exactly 10 questions.
 SUBJECT constraints:
 - If subject is "Aptitude", focus ONLY on quantitative, logical, and verbal aptitude.
 - If subject is "DSA", focus ONLY on Data Structures and Algorithms.
 
-Difficulty: \
-Focus heavily on these weak topics if provided: \
+Difficulty: ${difficulty}
+Focus heavily on these weak topics if provided: ${weakTopics.join(", ")}
 
 Supported Types: "MCQ", "True/False", "Fill-in-the-blanks".
 For MCQs, provide exactly 4 options. For True/False, provide exactly 2 options ("True", "False"). For Fill-in-the-blanks, options should be null or empty.
@@ -315,7 +314,7 @@ Return a strict JSON array of objects following this schema exactly:
     "correctAnswer": "string (Must exactly match one option, or the exact expected word)",
     "explanation": "string (Briefly explain why it is correct)"
   }
-]\;
+]`;
 
   const json = await executeWithFallbackJSON(prompt);
   return Array.isArray(json) ? json : [json];
