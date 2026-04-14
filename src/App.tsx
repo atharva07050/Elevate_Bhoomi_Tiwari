@@ -6,7 +6,6 @@ import ResumeAnalyzer from "@/components/features/ResumeAnalyzer";
 import CrashPlan from "@/components/features/CrashPlan";
 import PressureTest from "@/components/features/PressureTest";
 import MockInterview from "@/components/features/MockInterview";
-import StarBuilder from "@/components/features/StarBuilder";
 import AIRecruiter from "@/components/features/AIRecruiter";
 import {
   LayoutDashboard,
@@ -47,7 +46,6 @@ const NAV_ITEMS = [
   { id: "plan", label: "7-Day Plan", icon: Calendar },
   { id: "pressure", label: "Pressure Test", icon: Timer },
   { id: "mock", label: "Mock Interview", icon: MessageSquare },
-  { id: "star", label: "STAR Builder", icon: Sparkles },
 ];
 
 export default function App() {
@@ -204,9 +202,6 @@ export default function App() {
                 </TabsContent>
                 <TabsContent value="mock" className="m-0 h-full">
                   <MockInterview />
-                </TabsContent>
-                <TabsContent value="star" className="m-0 h-full">
-                  <StarBuilder />
                 </TabsContent>
               </div>
             </Tabs>
