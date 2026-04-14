@@ -10,6 +10,8 @@ import AIRecruiter from "@/components/features/AIRecruiter";
 import CultureFit from "@/components/features/CultureFit";
 import Portfolio from "@/components/features/Portfolio";
 import SkillRoadmap from "@/components/features/SkillRoadmap";
+import AdaptiveQuiz from "@/components/features/AdaptiveQuiz";
+
 import {
   LayoutDashboard,
   FileText,
@@ -25,7 +27,8 @@ import {
   Zap,
   Building2,
   Globe,
-  Map
+  Map,
+  BrainCircuit
 } from "lucide-react";
 import Login from "@/components/auth/Login";
 import PlacementBot from "@/components/features/PlacementBot";
@@ -47,7 +50,9 @@ const DEFAULT_PROFILE: UserProfile = {
 
 const NAV_ITEMS = [
   { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
+  { id: "adaptive", label: "Adaptive Quiz", icon: BrainCircuit },
   { id: "recruiter", label: "AI Recruiter", icon: Target },
+
   { id: "resume", label: "Resume AI", icon: FileText },
   { id: "plan", label: "7-Day Plan", icon: Calendar },
   { id: "pressure", label: "Pressure Test", icon: Timer },
@@ -189,6 +194,9 @@ export default function App() {
               <div className="bg-card border rounded-2xl p-6 shadow-sm min-h-[700px] border-primary/5">
                 <TabsContent value="dashboard" className="m-0 h-full">
                   <Dashboard profile={profile} onTakeTest={() => setActiveTab("pressure")} />
+                </TabsContent>
+                <TabsContent value="adaptive" className="m-0 h-full">
+                  <AdaptiveQuiz />
                 </TabsContent>
                 <TabsContent value="recruiter" className="m-0 h-full">
                   <AIRecruiter />

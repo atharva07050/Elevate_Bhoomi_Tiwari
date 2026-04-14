@@ -282,3 +282,41 @@ export async function sendChatMessage(
     }
   }
 }
+
+/**
+ * AI Quiz Generator (Aptitude & DSA ONLY)
+ */
+export async function generateAdaptiveQuiz(
+  subject: "Aptitude" | "DSA", 
+  difficulty: "Easy" | "Medium" | "Hard",
+  weakTopics: string[]
+) {
+  const prompt = \You are an adaptive quiz generator for tech placement preparation.
+Generate exactly 10 questions.
+SUBJECT constraints:
+- If subject is "Aptitude", focus ONLY on quantitative, logical, and verbal aptitude.
+- If subject is "DSA", focus ONLY on Data Structures and Algorithms.
+
+Difficulty: \
+Focus heavily on these weak topics if provided: \
+
+Supported Types: "MCQ", "True/False", "Fill-in-the-blanks".
+For MCQs, provide exactly 4 options. For True/False, provide exactly 2 options ("True", "False"). For Fill-in-the-blanks, options should be null or empty.
+
+Return a strict JSON array of objects following this schema exactly:
+[
+  {
+    "id": "q1",
+    "topic": "string (the specific micro-topic, e.g., Arrays, Profit & Loss)",
+    "type": "MCQ" | "True/False" | "Fill-in-the-blanks",
+    "difficulty": "Easy" | "Medium" | "Hard",
+    "question": "string",
+    "options": ["string", "string", "string", "string"],
+    "correctAnswer": "string (Must exactly match one option, or the exact expected word)",
+    "explanation": "string (Briefly explain why it is correct)"
+  }
+]\;
+
+  const json = await executeWithFallbackJSON(prompt);
+  return Array.isArray(json) ? json : [json];
+}

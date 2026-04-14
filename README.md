@@ -4,6 +4,10 @@ Saarthi is a next-generation Career Readiness platform designed to bridge the ga
 
 ---
 
+## Video Link
+
+https://drive.google.com/file/d/1CPjq7TqTQ8NCL30FqkLVkX2xZdFPySeE/view?usp=drivesdk
+
 ## 🚀 Key Features
 
 ### 1. 🎙️ AI Video Mock Interview (with Emotion Tracking)
