@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { motion, AnimatePresence } from "motion/react";
 import { Timer, AlertTriangle, PlayCircle } from "lucide-react";
-import { UserProfile } from "@/App";
+import { UserProfile } from "@/lib/types";
 
 const QUESTIONS = [
   {
@@ -176,7 +176,8 @@ export default function PressureTest({ onComplete }: { onComplete: (profile: Use
       problemSolving: psScore,
       topSkills,
       areasForImprovement,
-      testTaken: true
+      testTaken: true,
+      history: []
     };
 
     onComplete(profile);
