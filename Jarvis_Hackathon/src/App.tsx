@@ -153,11 +153,14 @@ export default function App() {
       {/* Sidebar */}
       <aside className="w-64 border-r border-white/5 bg-card/30 backdrop-blur-xl hidden md:flex flex-col">
         <div className="p-6">
-          <div className="flex items-center gap-2 mb-8">
-            <div className="p-2 rounded-xl bg-primary/10">
+          <div className="flex items-center gap-2 mb-8 px-2">
+            <div className="p-2 rounded-xl bg-primary/10 shrink-0">
               <GraduationCap className="h-6 w-6 text-primary" />
             </div>
-            <span className="text-xl font-bold bg-gradient-to-r from-white to-white/60 bg-clip-text text-transparent">Saarthi AI</span>
+            <div className="flex flex-col">
+              <span className="text-lg font-bold bg-gradient-to-r from-white to-white/60 bg-clip-text text-transparent leading-none">Saarthi</span>
+              <span className="text-[8px] font-bold uppercase tracking-wider text-muted-foreground/80 mt-0.5 whitespace-nowrap">The Placement Prep Hub</span>
+            </div>
           </div>
 
           <nav className="space-y-1">
